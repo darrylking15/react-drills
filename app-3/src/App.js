@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
+class App extends Component{
+  constructor(){
+    super()
+    this.state = {
+      filteredData: '',
+      words: ['darryl', 'King', 'apple', 'bird', 'fish']
+        
+    }
+   
+    }
+    handleChange(filter){
+      this.setState({filteredData: filter})
+}
+
+render(){
+  let newFilteredData = this.state.words
+  .filter((element, index) => {
+    return element.includes(this.state.filteredData)
+  })
+  .map((element, index) => {
+  return <h2 key={index}>{element}</h2>
+  })
+  
+  
+  return(
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <input onChange={e => this.handleChange(e.target.value)} type='text'></input>
+     {newFilteredData}
     </div>
-  );
+    
+  )
+}
+
+
+
+
+
+
+
+
+
+
 }
 
 export default App;
